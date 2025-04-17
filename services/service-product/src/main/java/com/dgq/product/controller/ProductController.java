@@ -1,0 +1,22 @@
+package com.dgq.product.controller;
+
+import com.dgq.product.Product;
+import com.dgq.product.service.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class ProductController {
+
+    @Autowired
+    private ProductService productService;
+
+    @RequestMapping("/product/{productId}")
+    public Product getProduct(@PathVariable("productId") Long productId) {
+        Product product = productService.getProductById(productId);
+        System.out.println("product");
+        return product;
+    }
+}
