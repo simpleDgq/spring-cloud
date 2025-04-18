@@ -1,6 +1,7 @@
 package com.dgq.order.config;
 
 import feign.Logger;
+import feign.Retryer;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,5 +25,14 @@ public class OrderConfig {
     @Bean
     Logger.Level feignLoggerLevel() {
         return Logger.Level.FULL;
+    }
+
+    /**
+     * 开启feign重试逻辑
+     * @return
+     */
+    @Bean
+    Retryer retryer() {
+        return new Retryer.Default(); // 使用feign默认的重试逻辑，Default也有参数可以自己设置
     }
 }
