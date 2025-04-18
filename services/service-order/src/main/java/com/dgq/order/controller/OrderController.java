@@ -1,6 +1,7 @@
 package com.dgq.order.controller;
 
 import com.dgq.order.Order;
+import com.dgq.order.properties.OrderProperties;
 import com.dgq.order.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -9,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-@RefreshScope // 激活配置自动刷新功能
+//@RefreshScope // 激活配置自动刷新功能
 @RestController
 public class OrderController {
 
@@ -17,10 +18,13 @@ public class OrderController {
     private OrderService orderService;
 
     // 获取Nacos中的配置
-    @Value("${order.timeout}")
-    String orderTimeout;
-    @Value("${order.auto-confirm}")
-    String orderAutoConfirm;
+//    @Value("${order.timeout}")
+//    String orderTimeout;
+//    @Value("${order.auto-confirm}")
+//    String orderAutoConfirm;
+
+    @Autowired
+    OrderProperties orderProperties;
 
     @GetMapping("/create")
     public Order createOrder(@RequestParam Long productId, @RequestParam Long userId) {
@@ -33,6 +37,7 @@ public class OrderController {
 
     @GetMapping("getConfig")
     public String getConfig() {
-        return "orderTimeout: " + orderTimeout + ": orderAutoConfirm: " + orderAutoConfirm;
+//        return "orderTimeout: " + orderTimeout + ": orderAutoConfirm: " + orderAutoConfirm;
+        return "orderTimeout: " + orderProperties.getTimeout() + ": orderAutoConfirm: " + orderProperties.getAutoConfirm();
     }
 }
