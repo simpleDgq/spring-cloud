@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Bean;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-@EnableDiscoveryClient
+@EnableDiscoveryClient // 开启nacos服务发现功能
 @SpringBootApplication
 public class OrderMainApplication {
     public static void main(String[] args) {
