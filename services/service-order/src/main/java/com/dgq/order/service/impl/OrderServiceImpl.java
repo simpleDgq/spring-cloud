@@ -1,6 +1,7 @@
 package com.dgq.order.service.impl;
 
 import com.dgq.order.Order;
+import com.dgq.order.feign.ProductFeignClient;
 import com.dgq.order.service.OrderService;
 import com.dgq.product.Product;
 import lombok.extern.slf4j.Slf4j;
@@ -28,6 +29,9 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     LoadBalancerClient loadBalancerClient ;
 
+    @Autowired
+    ProductFeignClient productFeignClient;
+
     @Override
     public Order createOrder(Long productId, Long userId) {
 
@@ -35,7 +39,10 @@ public class OrderServiceImpl implements OrderService {
         // loadBalancerClient实现负载均衡
 //        Product product = this.getProductBalanced(productId);
         // 注解实现负载均衡
-        Product product = this.getProductBalancedAnnotation(productId);
+//        Product product = this.getProductBalancedAnnotation(productId);
+
+        // 使用openfeign进行远程调用。openfeign自带负载均衡
+        Product product = productFeignClient.getProductById(productId);
         Order order = new Order();
         order.setId(1L);
         order.setTotalAmount(product.getPrice().multiply(new BigDecimal(product.getNum())));

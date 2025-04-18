@@ -7,11 +7,13 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+@EnableFeignClients // 开启feign远程调用
 @EnableDiscoveryClient // 开启nacos服务发现功能
 @SpringBootApplication
 public class OrderMainApplication {
