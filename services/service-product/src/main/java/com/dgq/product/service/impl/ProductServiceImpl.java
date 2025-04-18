@@ -1,5 +1,7 @@
 package com.dgq.product.service.impl;
 import java.math.BigDecimal;
+import java.sql.Time;
+import java.util.concurrent.TimeUnit;
 
 import com.dgq.product.Product;
 import com.dgq.product.service.ProductService;
@@ -14,6 +16,14 @@ public class ProductServiceImpl implements ProductService {
         product.setPrice(new BigDecimal("99"));
         product.setProductName("iphone " + productId);
         product.setNum(12);
+
+        // 模拟API超时
+        try {
+            TimeUnit.SECONDS.sleep(100);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
         return product;
     }
 }
