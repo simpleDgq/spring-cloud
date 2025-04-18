@@ -29,6 +29,7 @@ public class OrderConfig {
 
     /**
      * 开启feign重试逻辑
+     * 放一个Retryer bean到容器就行了，会自动应用上
      * @return
      */
     @Bean
