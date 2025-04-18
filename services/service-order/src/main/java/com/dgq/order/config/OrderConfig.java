@@ -1,5 +1,6 @@
 package com.dgq.order.config;
 
+import feign.Logger;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,5 +15,14 @@ public class OrderConfig {
     @Bean
     public RestTemplate restTemplate() {
         return new RestTemplate();
+    }
+
+    /**
+     * 开启feign日志
+     * @return
+     */
+    @Bean
+    Logger.Level feignLoggerLevel() {
+        return Logger.Level.FULL;
     }
 }

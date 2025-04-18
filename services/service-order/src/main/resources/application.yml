@@ -11,6 +11,10 @@ spring:
       config:
         namespace: ${spring.profiles.active:dev} # 动态取值，而且默认是dev
 
+# 开启日志，打印com.order.feign包对应的日志
+logging:
+  level:
+    com.dgq.order.feign: debug
 ---
 spring:
   config:
