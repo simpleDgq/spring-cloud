@@ -32,7 +32,7 @@ public class OrderConfig {
      * 放一个Retryer bean到容器就行了，会自动应用上
      * @return
      */
-    @Bean
+//    @Bean  // 注释掉是为了看fallback功能，避免重试，要等很久
     Retryer retryer() {
         return new Retryer.Default(); // 使用feign默认的重试逻辑，Default也有参数可以自己设置
     }
