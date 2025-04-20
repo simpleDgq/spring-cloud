@@ -13,6 +13,9 @@ spring:
             logger-level: full
             connect-timeout: 3000
             read-timeout: 5000
+#            request-interceptors:
+#              - com.dgq.order.interceptor.XTokenRequestInterceptor
+#            retryer: feign.retryer.Default
 
 # 开启熔断功能，openfeign fallback功能
 feign:
