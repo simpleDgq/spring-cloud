@@ -24,11 +24,13 @@ public class ProductController {
         Product product = productService.getProductById(productId);
         System.out.println("product");
 
-        try {
-            TimeUnit.SECONDS.sleep(2);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        int i = 10/0;
+
+//        try {
+//            TimeUnit.SECONDS.sleep(2);
+//        } catch (InterruptedException e) {
+//            throw new RuntimeException(e);
+//        }
 
         return product;
     }
