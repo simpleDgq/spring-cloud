@@ -42,9 +42,27 @@ public class OrderController {
      */
     @GetMapping("/seckill")
     // 自定义流控埋点
+    // 注意自定义的埋点资源名，不能和sentinel里面默认会扫描的web接口资源名一样。也就是@GetMapping("/seckill")里面的/seckill
+    // 否则会重复统计，造成bug
     @SentinelResource(value = "kill-order", fallback =  "killOrderFallback")
     public Order createKillOrder(@RequestParam("userId") Long userId, @RequestParam("productId") Long productId) {
         return orderService.createOrder(productId, userId);
+    }
+
+    /**
+     * fallback和blockHandler区别：
+     *  fallback指定的兜底回调，异常使用用Throwable，能处理所有的异常，比如业务执行期间抛出的异常
+     * blockHandler，它只能处理BlockedException
+     *
+     */
+    public Order killOrderFallback(Long userId, Long productId, Throwable e) {
+        log.info("fallback.....................");
+        Order order = new Order() {{
+            setId(-1L);
+            setAddress("商品已下架");
+        }};
+
+        return order;
     }
 
 

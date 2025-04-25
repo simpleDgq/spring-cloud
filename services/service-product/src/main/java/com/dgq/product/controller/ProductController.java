@@ -24,7 +24,7 @@ public class ProductController {
         Product product = productService.getProductById(productId);
         System.out.println("product");
 
-        int i = 10/0;
+//        int i = 10/0;
 
 //        try {
 //            TimeUnit.SECONDS.sleep(2);
