@@ -20,6 +20,8 @@ spring:
       transport:
         dashboard: localhost:8080
       eager: true #提前加载，项目启动，自动连上sentinel控制台
+      # 分割web上下文。这样才能使用sentinel流控的链路规则
+      web-context-unify: false
 
 # 开启熔断功能，openfeign fallback功能
 feign:

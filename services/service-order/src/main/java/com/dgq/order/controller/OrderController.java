@@ -35,6 +35,16 @@ public class OrderController {
         return order;
     }
 
+    /**
+     * 创建订单-秒杀
+     */
+    @GetMapping("/seckill")
+    // 自定义流控埋点
+    @SentinelResource(value = "kill-order", fallback =  "killOrderFallback")
+    public Order createKillOrder(@RequestParam("userId") Long userId, @RequestParam("productId") Long productId) {
+        return orderService.createOrder(productId, userId);
+    }
+
 
     @GetMapping("getConfig")
     public String getConfig() {
