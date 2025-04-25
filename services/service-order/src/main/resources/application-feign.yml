@@ -16,6 +16,10 @@ spring:
 #            request-interceptors:
 #              - com.dgq.order.interceptor.XTokenRequestInterceptor
 #            retryer: feign.retryer.Default
+    sentinel:
+      transport:
+        dashboard: localhost:8080
+      eager: true #提前加载，项目启动，自动连上sentinel控制台
 
 # 开启熔断功能，openfeign fallback功能
 feign:

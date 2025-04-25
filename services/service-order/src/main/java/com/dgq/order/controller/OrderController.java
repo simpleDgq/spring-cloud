@@ -1,5 +1,6 @@
 package com.dgq.order.controller;
 
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.dgq.order.Order;
 import com.dgq.order.properties.OrderProperties;
 import com.dgq.order.service.OrderService;

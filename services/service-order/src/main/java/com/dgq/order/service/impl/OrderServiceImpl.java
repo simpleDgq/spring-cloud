@@ -1,5 +1,6 @@
 package com.dgq.order.service.impl;
 
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.dgq.order.Order;
 import com.dgq.order.feign.ProductFeignClient;
 import com.dgq.order.service.OrderService;
@@ -33,6 +34,7 @@ public class OrderServiceImpl implements OrderService {
     ProductFeignClient productFeignClient;
 
     @Override
+    @SentinelResource(value = "createOrder")
     public Order createOrder(Long productId, Long userId) {
 
         // Product product = this.getProduct(productId);
