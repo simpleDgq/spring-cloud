@@ -4,6 +4,7 @@ import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.dgq.order.Order;
 import com.dgq.order.properties.OrderProperties;
 import com.dgq.order.service.OrderService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 //@RefreshScope // 激活配置自动刷新功能
 @RestController
+@Slf4j
 public class OrderController {
 
     @Autowired
@@ -51,5 +53,21 @@ public class OrderController {
 //        return "orderTimeout: " + orderTimeout + ": orderAutoConfirm: " + orderAutoConfirm;
         return "orderTimeout: " + orderProperties.getTimeout() + ": orderAutoConfirm: " + orderProperties.getAutoConfirm()
                 + ": orderDbUrl: " + orderProperties.getDbUrl();
+    }
+
+    /**
+     * 写数据
+     */
+    @GetMapping("/writedb")
+    public String writeData() {
+        return "write data success";
+    }
+    /**
+     * 读数据
+     */
+    @GetMapping("/readdb")
+    public String readData() {
+        log.info("read success......");
+        return "read data success";
     }
 }
