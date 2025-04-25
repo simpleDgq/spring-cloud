@@ -1,6 +1,7 @@
 package com.dgq.order.service.impl;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
+import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.dgq.order.Order;
 import com.dgq.order.feign.ProductFeignClient;
 import com.dgq.order.service.OrderService;
@@ -34,7 +35,7 @@ public class OrderServiceImpl implements OrderService {
     ProductFeignClient productFeignClient;
 
     @Override
-    @SentinelResource(value = "createOrder")
+    @SentinelResource(value = "createOrder", blockHandler = "createOrderFallbackHandler")
     public Order createOrder(Long productId, Long userId) {
 
         // Product product = this.getProduct(productId);
@@ -54,6 +55,24 @@ public class OrderServiceImpl implements OrderService {
         order.setProducts(Arrays.asList(product));
 
         return order;
+    }
+
+
+    /**
+     * sentinel 兜底回调
+     * @param productId
+     * @param userId
+     * @param exception
+     * @return
+     */
+    public Order createOrderFallbackHandler(Long productId, Long userId, BlockException exception) {
+        log.error("createOrder fallbackHandler, productId: {}, userId: {}", productId, userId, exception);
+        return new Order(){{
+            setId(0L);
+            setTotalAmount(BigDecimal.ZERO);
+            setNickName("未知用户");
+            setAddress("异常信息：" + exception.getClass());
+        }};
     }
 
     // 第一版：远程调用获取商品信息
