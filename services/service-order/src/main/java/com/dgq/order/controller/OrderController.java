@@ -9,12 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 //@RefreshScope // 激活配置自动刷新功能
 @RestController
 @Slf4j
+@RequestMapping("/api/order") // 网关转发的时候，是直接按原始的uri转发，所以要加上全局的路径
 public class OrderController {
 
     @Autowired

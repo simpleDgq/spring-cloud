@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.concurrent.TimeUnit;
 
 @RestController
+@RequestMapping("/api/product") // 网关转发的时候，是直接按原始的uri转发，所以要加上全局的路径
 public class ProductController {
 
     @Autowired
