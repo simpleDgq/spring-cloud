@@ -5,7 +5,13 @@ spring:
         - id: bing-route
           uri: https://cn.bing.com
           predicates:
-            - Path=/**
+            - name: Path
+              args:
+                patterns: /search
+            - name: Query
+              args:
+                param: q
+                regexp: haha
           order: 10
         # id 全局唯一
         - id: order-route
