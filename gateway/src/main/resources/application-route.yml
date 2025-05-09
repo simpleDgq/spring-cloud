@@ -1,6 +1,13 @@
 spring:
   cloud:
     gateway:
+#      允许全局跨域
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowed-origin-patterns: '*'
+            allowed-headers: '*'
+            allowedMethods: '*'
       routes:
         - id: bing-route
           uri: https://cn.bing.com
