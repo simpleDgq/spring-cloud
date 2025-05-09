@@ -7,10 +7,17 @@ spring:
           predicates:
             - Path=/**
           order: 10
-        - id: order
+        # id 全局唯一
+        - id: order-route
+          # 指定服务名称
           uri: lb://service-order
+          # 指定断言规则，即路由匹配规则
+          # Fully Expanded Arguments
           predicates:
-            - Path=/api/order/**
+            - name: Path
+              args:
+                patterns: /api/order/**
+                matchTrailingSlash: true
           order: 1
         - id: product
           uri: lb://service-product
