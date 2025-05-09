@@ -43,3 +43,6 @@ spring:
           filters:
             - RewritePath=/api/product/?(?<segment>.*), /$\{segment}
           order: 2
+      default-filters:
+        # 为所有路由添加响应头过滤器
+        - AddResponseHeader=X-Response-Abc, 123
