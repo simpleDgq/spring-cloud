@@ -35,6 +35,8 @@ spring:
             - RewritePath=/api/order/?(?<segment>.*), /$\{segment}
 #            给请求加一个请求头
             - AddRequestHeader=X-Request-red, blue
+            # 自定义过滤器
+            - OnceToken=X-Response-Token, jwt
           order: 1
         - id: product
           uri: lb://service-product
@@ -42,6 +44,8 @@ spring:
             - Path=/api/product/**
           filters:
             - RewritePath=/api/product/?(?<segment>.*), /$\{segment}
+            # 自定义过滤器
+            - OnceToken=X-Response-Token, uuid
           order: 2
       default-filters:
         # 为所有路由添加响应头过滤器
