@@ -16,7 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 //@RefreshScope // 激活配置自动刷新功能
 @RestController
 @Slf4j
-@RequestMapping("/api/order") // 网关转发的时候，是直接按原始的uri转发，所以要加上全局的路径
+// 通过gateway里面的filter重写路径了，不需要加全局路径
+//@RequestMapping("/api/order") // 网关转发的时候，是直接按原始的uri转发，所以要加上全局的路径
 public class OrderController {
 
     @Autowired

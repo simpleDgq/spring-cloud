@@ -13,6 +13,6 @@ public interface ProductFeignClient {
     /**
      * 在Openfegin是发送get请求，调用service-product提供的getProductById方法
      */
-    @GetMapping("/api/product/product/{id}")
+    @GetMapping("/product/{id}")
     Product getProductById(@PathVariable("id") Long id);
 }
