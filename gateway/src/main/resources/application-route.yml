@@ -33,6 +33,8 @@ spring:
           filters:
             # 类似把 /api/order/a/bc 重写为 /a/bc，移除路径前的 /api/order/
             - RewritePath=/api/order/?(?<segment>.*), /$\{segment}
+#            给请求加一个请求头
+            - AddRequestHeader=X-Request-red, blue
           order: 1
         - id: product
           uri: lb://service-product
