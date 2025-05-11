@@ -19,7 +19,7 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     AccountFeignClient accountFeignClient;
 
-    @Transactional
+    @Transactional // 测试本地事务，本地事务发生异常，会回滚
     @Override
     public OrderTbl create(String userId, String commodityCode, int orderCount) {
         //1、计算订单价格

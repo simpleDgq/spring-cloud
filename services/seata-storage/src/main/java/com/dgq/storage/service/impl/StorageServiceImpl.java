@@ -14,12 +14,12 @@ public class StorageServiceImpl implements StorageService {
 
 
 
-    @Transactional
+    @Transactional // 测试本地事务，本地事务发生异常，会回滚
     @Override
     public void deduct(String commodityCode, int count) {
         storageTblMapper.deduct(commodityCode, count);
         if (count == 5) {
-            throw new RuntimeException("库存不足");
+            throw new RuntimeException("库存不足"); // 本地事务发生，异常数据会回滚
         }
     }
 }
