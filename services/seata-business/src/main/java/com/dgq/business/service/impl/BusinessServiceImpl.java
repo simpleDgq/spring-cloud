@@ -3,6 +3,7 @@ package com.dgq.business.service.impl;
 import com.dgq.business.feign.OrderFeignClient;
 import com.dgq.business.feign.StorageFeignClient;
 import com.dgq.business.service.BusinessService;
+import org.apache.seata.spring.annotation.GlobalTransactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,7 @@ public class BusinessServiceImpl implements BusinessService {
 
 
     @Override
+    @GlobalTransactional // 开启全局事务
     public void purchase(String userId, String commodityCode, int orderCount) {
         // 1. 扣减库存
         storageFeignClient.deduct(commodityCode, orderCount);
