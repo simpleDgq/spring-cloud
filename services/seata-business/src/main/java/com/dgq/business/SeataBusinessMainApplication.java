@@ -6,7 +6,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
 
-@EnableFeignClients(basePackages = "com.dgq.business.feign")
+@EnableFeignClients(basePackages = "com.dgq.business.feign") // 将feign客户端注入到spring容器中
 @EnableDiscoveryClient
 @SpringBootApplication
 public class SeataBusinessMainApplication {

@@ -8,7 +8,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @EnableTransactionManagement // 开启本地事务
-@EnableFeignClients(basePackages = "com.dgq.order.feign")
+@EnableFeignClients(basePackages = "com.dgq.order.feign") // 注入feign客户端到spring容器
 @MapperScan("com.dgq.order.mapper")
 @EnableDiscoveryClient
 @SpringBootApplication

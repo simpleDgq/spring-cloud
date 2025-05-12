@@ -19,9 +19,10 @@ public class BusinessServiceImpl implements BusinessService {
 
     @Override
     public void purchase(String userId, String commodityCode, int orderCount) {
-        //1. 扣减库存
-
-        //2. 创建订单
+        // 1. 扣减库存
+        storageFeignClient.deduct(commodityCode, orderCount);
+        // 2. 创建订单
+        orderFeignClient.create(userId, commodityCode, orderCount);
 
     }
 }

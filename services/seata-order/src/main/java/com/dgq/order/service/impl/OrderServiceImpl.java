@@ -14,8 +14,6 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     OrderTblMapper orderTblMapper;
 
-
-
     @Autowired
     AccountFeignClient accountFeignClient;
 
@@ -26,7 +24,7 @@ public class OrderServiceImpl implements OrderService {
         int orderMoney = calculate(commodityCode, orderCount);
 
         //2、扣减账户余额
-        accountFeignClient.debit(userId, orderMoney);
+        accountFeignClient.debit(userId, orderMoney); // 远程调用
         //3、保存订单
         OrderTbl orderTbl = new OrderTbl();
         orderTbl.setUserId(userId);
@@ -37,6 +35,11 @@ public class OrderServiceImpl implements OrderService {
         //3、保存订单
         orderTblMapper.insert(orderTbl);
 
+        /**
+         * 发生异常，只有当前create方法对应的数据库连接，也就是order数据库里面的数据会回滚
+         * accout和storage对应的数据库修改，是不会回滚的
+         * 出现了分布式服务，不能同时进行回滚的问题
+         */
         int i = 10/0;
 
         return orderTbl;
