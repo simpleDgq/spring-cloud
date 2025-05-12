@@ -312,4 +312,4 @@ Seata使用：
 
 seata有个服务端，先启动服务端，然后在代码里面引入seata的依赖，写好seata配置文件，最顶端的方法入口上使用 `@GlobalTransactional` 注解，由此开启全局事务。
 
-
+## 二阶提交
